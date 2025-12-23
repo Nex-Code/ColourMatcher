@@ -1,6 +1,13 @@
 ﻿::deep.root {
   --imgHeight: 100px;
 }
+::deep.root .title-holder {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  font-size: larger;
+  font-weight: bolder;
+}
 ::deep.root .band-holder, ::deep.root .boundaries, ::deep.root .found-colours {
   position: absolute;
   top: 0;
@@ -37,6 +44,10 @@
 }
 ::deep.root .boundaries .boundary.inverted {
   border-top: 3px solid white;
+}
+::deep.root .boundaries .boundary[style="top:0vh"] label {
+  transform: none;
+  border-bottom: none;
 }
 ::deep.root .found-colours .colour {
   position: relative;

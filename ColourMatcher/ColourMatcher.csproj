@@ -8,6 +8,56 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Bands\bedstraw.png" />
+    <None Remove="Bands\cochineal.png" />
+    <None Remove="Bands\coppersalt.png" />
+    <None Remove="Bands\indigo.png" />
+    <None Remove="Bands\kermes.png" />
+    <None Remove="Bands\madder1.png" />
+    <None Remove="Bands\madder2.png" />
+    <None Remove="Bands\madder3.png" />
+    <None Remove="Bands\madderpurple.png" />
+    <None Remove="Bands\morello.png" />
+    <None Remove="Bands\murex1.png" />
+    <None Remove="Bands\murex2.png" />
+    <None Remove="Bands\orchil.png" />
+    <None Remove="Bands\saffron.png" />
+    <None Remove="Bands\sappanwood1.png" />
+    <None Remove="Bands\sappanwood2.png" />
+    <None Remove="Bands\tannins1.png" />
+    <None Remove="Bands\weld1.png" />
+    <None Remove="Bands\weld2.png" />
+    <None Remove="Bands\weld3.png" />
+    <None Remove="Bands\weldwood.png" />
+    <None Remove="Bands\wood.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Bands\bedstraw.png" />
+    <Content Include="Bands\cochineal.png" />
+    <Content Include="Bands\coppersalt.png" />
+    <Content Include="Bands\indigo.png" />
+    <Content Include="Bands\kermes.png" />
+    <Content Include="Bands\madder1.png" />
+    <Content Include="Bands\madder2.png" />
+    <Content Include="Bands\madder3.png" />
+    <Content Include="Bands\madderpurple.png" />
+    <Content Include="Bands\morello.png" />
+    <Content Include="Bands\murex1.png" />
+    <Content Include="Bands\murex2.png" />
+    <Content Include="Bands\orchil.png" />
+    <Content Include="Bands\saffron.png" />
+    <Content Include="Bands\sappanwood1.png" />
+    <Content Include="Bands\sappanwood2.png" />
+    <Content Include="Bands\tannins1.png" />
+    <Content Include="Bands\weld1.png" />
+    <Content Include="Bands\weld2.png" />
+    <Content Include="Bands\weld3.png" />
+    <Content Include="Bands\weldwood.png" />
+    <Content Include="Bands\wood.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="10.0.1" />
   </ItemGroup>
 

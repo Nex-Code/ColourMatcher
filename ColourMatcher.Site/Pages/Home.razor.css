@@ -1,0 +1,22 @@
+﻿::deep a {
+  position: relative;
+  height: 50px;
+  display: inline-block;
+  margin: 0.5rem 0;
+  margin-left: -8px;
+  width: calc(100% + 16px);
+}
+::deep a img {
+  width: 100%;
+}
+::deep a .title {
+  position: absolute;
+  top: 33%;
+  bottom: 0;
+  left: 0.5rem;
+  font-size: larger;
+  font-weight: bold;
+}
+::deep a[href="/Band/morello"] {
+  color: white;
+}

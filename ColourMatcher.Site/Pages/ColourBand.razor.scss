@@ -2,6 +2,16 @@
     &.root {
         --imgHeight: 100px;
 
+
+        .title-holder {
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            font-size: larger;
+            font-weight: bolder;
+        }
+
+
         .band-holder, .boundaries, .found-colours {
             position: absolute;
             top: 0;
@@ -46,6 +56,13 @@
 
                 &.inverted {
                     border-top: 3px solid white;
+                }
+
+                &[style="top:0vh"]{
+                    label{
+                        transform:none;
+                        border-bottom:none;
+                    }
                 }
             }
         }
