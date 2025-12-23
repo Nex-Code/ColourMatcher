@@ -1,0 +1,12 @@
+﻿@page "/"
+@using ColourMatcher.Site.Code
+
+
+@foreach (var f in Boundaries.Filenames)
+{
+    var src = $"./Bands/{f.ToLower()}.png";
+    var url = $"/Band/{f.ToLower()}";
+    <a href="@url">
+        <img src="@src" height="50" width="500"/>
+    </a>
+}

@@ -1,0 +1,146 @@
+﻿@page "/Band/{BandName}"
+@using ColourMatcher.Site.Code
+
+@if (string.IsNullOrWhiteSpace(BandName))
+{
+    return;
+}
+
+
+<div class="root">
+    <div class="band-holder">
+        <img src="@ImageSource" class="band" />
+    </div>
+    
+    <div class="title-holder">
+        <h4>
+            @BandName
+        </h4>
+    </div>
+    
+    <div class="boundaries">
+        @foreach (var b in Boundaries)
+        {
+            <div class="@($"boundary {(b.Invert?"inverted" :"")} {(b.Text==null? "blank" : "")}")" style="@($"top:{(b.Percentage * 100)}vh")">
+                <label>
+                    @b.Text
+                </label>
+            </div>
+        }
+    </div>
+
+    <div class="found-colours">
+        @foreach (var b in Paired)
+        {
+            <div class="@($"colour {(SelectedColour==b.Id? "active":"")}")" style="@($"top:{(b.Top)}vh; height:{b.Height}vh;")" @onclick="()=>SelectedColour=b.Id">
+                <div class="swatch" style="@($"background-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")">
+
+                </div>
+                <div class="dets" style="@($"background-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")">
+                    <div>
+                        Name: @b.Colour.Name
+                    </div>
+                    <div>
+                        Code: @b.Colour.Code
+                    </div>
+                    <div>
+                        Source: @b.Colour.Source
+                    </div>
+                    <div>
+                        Distance: @b.Distance
+                    </div>
+                    @if (b.Colour.Source == ColourSource.Pantone)
+                    {
+                        <div>
+                            <a href="@($"https://www.pantone.com/media/color-finder/img/chips/pantone-color-chip-{b.Colour.Code}-tcx.webp")" target="_blank">
+                                View Swatch
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@($"https://www.pantone.com/uk/en/color-finder/{b.Colour.Code}-tcx")" target="_blank">
+                                See on Pantone
+                            </a>
+                        </div>
+                    }else if (b.Colour.Source == ColourSource.Valspar )
+                    {
+
+                        if (ValsparUrls.Urls.TryGetValue(b.Colour.Code, out var url))
+                        {
+                            <a href="@url" target="_blank">
+                                See on Valspar 
+                            </a>
+                        }
+                    }
+
+                </div>
+                
+
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@code {
+
+
+    private string ImageSource => $"./Bands/{BandName.ToLower()}.png";
+
+    [Parameter]
+    public string BandName { get; set; }
+
+    private IEnumerable<Boundary> Boundaries { get; set; } = [];
+    private IEnumerable<Range> Paired { get; set; } = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Boundaries = Code.Boundaries.GetFor(BandName);
+        var pairs = PairedColours.GetFor(BandName);
+
+        Paired = pairs.GroupBy(i => i.Colour.Id).Select(Range.Build).ToArray();
+    }
+
+    private Guid SelectedColour { get; set; }
+
+
+    private record Range(int MinX, int MaxX, decimal MinPercentage, decimal MaxPercentage, MatchedColour Colour, int Distance)
+    {
+        public Guid Id { get; } = Guid.NewGuid();
+        public decimal Top => MinPercentage * 100;
+        public decimal Height => (MaxPercentage * 100) - (MinPercentage * 100);
+
+
+
+        public static Range Build(IEnumerable<PairedColour> colours)
+        {
+            var r = new Range(int.MaxValue, int.MinValue, int.MaxValue, int.MinValue, colours.First().Colour , 0);
+
+            foreach (var c in colours)
+            {
+
+                var d = r.Distance;
+                if (Math.Abs(r.Distance) < c.AbsDistance)
+                    d = c.Distance;
+
+
+                r = r with
+                {
+                    MinX = Math.Min(r.MinX, c.X),
+                    MaxX = Math.Max(r.MaxX, c.X),
+                    MinPercentage = Math.Min(r.MinPercentage, c.Percentage),
+                    MaxPercentage = Math.Max(r.MaxPercentage, c.Percentage),
+                    Distance = d,
+                };
+            }
+
+            return r;
+        }
+    }
+
+
+
+}

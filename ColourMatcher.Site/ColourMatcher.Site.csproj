@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\Bands\bedstraw.png" />
+    <Content Remove="wwwroot\Bands\cochineal.png" />
+    <Content Remove="wwwroot\Bands\coppersalt.png" />
+    <Content Remove="wwwroot\Bands\indigo.png" />
+    <Content Remove="wwwroot\Bands\kermes.png" />
+    <Content Remove="wwwroot\Bands\madder1.png" />
+    <Content Remove="wwwroot\Bands\madder2.png" />
+    <Content Remove="wwwroot\Bands\madder3.png" />
+    <Content Remove="wwwroot\Bands\madderpurple.png" />
+    <Content Remove="wwwroot\Bands\morello.png" />
+    <Content Remove="wwwroot\Bands\murex1.png" />
+    <Content Remove="wwwroot\Bands\murex2.png" />
+    <Content Remove="wwwroot\Bands\orchil.png" />
+    <Content Remove="wwwroot\Bands\saffron.png" />
+    <Content Remove="wwwroot\Bands\sappanwood1.png" />
+    <Content Remove="wwwroot\Bands\sappanwood2.png" />
+    <Content Remove="wwwroot\Bands\tannins1.png" />
+    <Content Remove="wwwroot\Bands\weld1.png" />
+    <Content Remove="wwwroot\Bands\weld2.png" />
+    <Content Remove="wwwroot\Bands\weld3.png" />
+    <Content Remove="wwwroot\Bands\weldwood.png" />
+    <Content Remove="wwwroot\Bands\wood.png" />
+    <Content Remove="wwwroot\matches.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\Bands\bedstraw.png" />
+    <None Include="wwwroot\Bands\cochineal.png" />
+    <None Include="wwwroot\Bands\coppersalt.png" />
+    <None Include="wwwroot\Bands\indigo.png" />
+    <None Include="wwwroot\Bands\kermes.png" />
+    <None Include="wwwroot\Bands\madder1.png" />
+    <None Include="wwwroot\Bands\madder2.png" />
+    <None Include="wwwroot\Bands\madder3.png" />
+    <None Include="wwwroot\Bands\madderpurple.png" />
+    <None Include="wwwroot\Bands\morello.png" />
+    <None Include="wwwroot\Bands\murex1.png" />
+    <None Include="wwwroot\Bands\murex2.png" />
+    <None Include="wwwroot\Bands\orchil.png" />
+    <None Include="wwwroot\Bands\saffron.png" />
+    <None Include="wwwroot\Bands\sappanwood1.png" />
+    <None Include="wwwroot\Bands\sappanwood2.png" />
+    <None Include="wwwroot\Bands\tannins1.png" />
+    <None Include="wwwroot\Bands\weld1.png" />
+    <None Include="wwwroot\Bands\weld2.png" />
+    <None Include="wwwroot\Bands\weld3.png" />
+    <None Include="wwwroot\Bands\weldwood.png" />
+    <None Include="wwwroot\Bands\wood.png" />
+    <EmbeddedResource Include="matches.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.11" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+</Project>

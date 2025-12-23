@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ColourMatcher.Site/ColourMatcher.Site.csproj" Id="a66c6898-e65d-4d52-87c3-0fac03d4ba17" />
+  <Project Path="ColourMatcher/ColourMatcher.csproj" />
+</Solution>
