@@ -12,7 +12,7 @@
         }
 
 
-        .band-holder, .boundaries, .found-colours {
+        .band-holder, .boundaries, .found-colours, .colour-blade {
             position: absolute;
             top: 0;
             left: 0;
@@ -58,18 +58,29 @@
                     border-top: 3px solid white;
                 }
 
-                &[style="top:0vh"]{
-                    label{
-                        transform:none;
-                        border-bottom:none;
+                &[style="top:0vh"] {
+                    label {
+                        transform: none;
+                        border-bottom: none;
                     }
                 }
             }
         }
 
         .found-colours {
+
+            &.has-active{
+                .colour:not(.active){
+                    .swatch{
+                        opacity:0.5;
+                    }
+                }
+            }
+
+
             .colour {
-                position: relative;
+                position: absolute;
+                width: 100%;
 
                 .swatch {
                     height: 100%;
@@ -80,17 +91,68 @@
                 }
 
                 .dets {
+                    position: relative;
                     margin-left: calc(var(--imgHeight));
-                    padding: 1rem;
+                    padding: 0.25rem;
                     display: none;
                     box-shadow: 10px 5px 5px rgb(0 0 0 / 36%);
+                    background: white;
+                    border: 0.75rem solid;
+
+                    &.above {
+                        transform: translateY(-100%);
+                    }
+
+                    &.below {
+                    }
+
+                    button {
+                        position: absolute;
+                        right: -0.75rem;
+                        top: -0.75rem;
+                        background: none;
+                        border-width: 1px;
+                    }
                 }
+
 
 
                 &.active {
                     .dets {
                         display: inline-block;
                     }
+                }
+            }
+        }
+
+        .colour-blade {
+            &:not([visible]) {
+                display: none;
+            }
+
+            display:inline-flex;
+            flex-direction:row;
+
+            .click-catcher{
+                width:100%;
+            }
+
+            .colour-list {
+                max-width:300px;
+                min-width:150px;
+                border-left: 2px solid #666;
+                background: white;
+                overflow-y: scroll;
+
+                .colour {
+                    padding-left:0.25rem;
+                    .swatch {
+                        margin-left:-0.25rem;
+                        height: 1.5rem;
+                        margin-bottom: -1.25rem;
+                    }
+
+                    margin-bottom: 0.5rem;
                 }
             }
         }

@@ -288,8 +288,8 @@ public class Matches
 
 public enum ColourSource
 {
-    Valspar,
-    Pantone
+    Valspar = 0,
+    Pantone = 1,
 }
 
 public record PairedColour(int X, int Distance, decimal Percentage, MatchedColour Colour)

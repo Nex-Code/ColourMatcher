@@ -14,7 +14,9 @@
     
     <div class="title-holder">
         <h4>
-            @BandName
+            <a @onclick="() => ShowBlade=!ShowBlade" href="javascript:void(0)">
+                @BandName
+            </a>
         </h4>
     </div>
     
@@ -29,25 +31,29 @@
         }
     </div>
 
-    <div class="found-colours">
+    <div class="@($"found-colours {(SelectedColour!=Guid.Empty? "has-active":"")}")">
         @foreach (var b in Paired)
         {
             <div class="@($"colour {(SelectedColour==b.Id? "active":"")}")" style="@($"top:{(b.Top)}vh; height:{b.Height}vh;")" @onclick="()=>SelectedColour=b.Id">
                 <div class="swatch" style="@($"background-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")">
 
                 </div>
-                <div class="dets" style="@($"background-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")">
+                <div class="@($"dets {(b.Top > 50 ? "above" : "below")}")" style="@($"border-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")">
+                    <button @onclick="()=>SelectedColour=Guid.Empty" @onclick:stopPropagation="true">
+                        X
+                    </button>
                     <div>
-                        Name: @b.Colour.Name
+                        @b.Colour.Name
                     </div>
                     <div>
-                        Code: @b.Colour.Code
+                        <small>
+                            @b.Colour.Code
+                        </small>
                     </div>
                     <div>
-                        Source: @b.Colour.Source
-                    </div>
-                    <div>
-                        Distance: @b.Distance
+                        <small>
+                            Distance: @b.Distance
+                        </small>
                     </div>
                     @if (b.Colour.Source == ColourSource.Pantone)
                     {
@@ -61,13 +67,14 @@
                                 See on Pantone
                             </a>
                         </div>
-                    }else if (b.Colour.Source == ColourSource.Valspar )
+                    }
+                    else if (b.Colour.Source == ColourSource.Valspar)
                     {
 
                         if (ValsparUrls.Urls.TryGetValue(b.Colour.Code, out var url))
                         {
                             <a href="@url" target="_blank">
-                                See on Valspar 
+                                See on Valspar
                             </a>
                         }
                     }
@@ -78,12 +85,70 @@
             </div>
         }
     </div>
+    
+    
+    
+    
+    <div class="colour-blade" visible="@ShowBlade">
+
+        <div @onclick="() => ShowBlade=false" class="click-catcher"> 
+
+        </div>
+        <div class="colour-list">
+            @foreach (var b in Paired.OrderBy(i=>i.Top))
+            {
+                <div class="colour" @onclick="() => SelectedColour=b.Id">
+                    <div class="swatch" style="@($"background-color:rgb({b.Colour.Colour.R},{b.Colour.Colour.G},{b.Colour.Colour.B});")"></div>
+                    <div>
+                        @b.Colour.Name
+                    </div>
+                    <div>
+                        <small>
+                            @b.Colour.Code
+                        </small>
+                    </div>
+                    <div>
+                        <small>
+                            Distance: @b.Distance
+                        </small>
+                    </div>
+                    @if (b.Colour.Source == ColourSource.Pantone)
+                    {
+                        <div>
+                            <a href="@($"https://www.pantone.com/media/color-finder/img/chips/pantone-color-chip-{b.Colour.Code}-tcx.webp")" target="_blank">
+                                View Swatch
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@($"https://www.pantone.com/uk/en/color-finder/{b.Colour.Code}-tcx")" target="_blank">
+                                See on Pantone
+                            </a>
+                        </div>
+                    }
+                    else if (b.Colour.Source == ColourSource.Valspar)
+                    {
+
+                        if (ValsparUrls.Urls.TryGetValue(b.Colour.Code, out var url))
+                        {
+                            <a href="@url" target="_blank">
+                                See on Valspar
+                            </a>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        
+    </div>
 </div>
 
 
 
 
 @code {
+
+
+    private bool ShowBlade { get; set; }
 
 
     private string ImageSource => $"./Bands/{BandName.ToLower()}.png";
